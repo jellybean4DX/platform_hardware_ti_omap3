@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) Texas Instruments - http://www.ti.com/
  *
@@ -878,7 +877,8 @@ sDynamicFormat = getenv("FORMAT");
     pComponentPrivate->pMotionVector->bFourMV    = 1;
     pComponentPrivate->pMotionVector->bUnrestrictedMVs = 0;   /* unused */
     pComponentPrivate->pMotionVector->eAccuracy  = OMX_Video_MotionVectorQuarterPel;
-    pComponentPrivate->pMotionVector->sXSearchRange = pComponentPrivate->pMotionVector->sXSearchRange = 64;
+    pComponentPrivate->pMotionVector->sXSearchRange = 64;	
+    pComponentPrivate->pMotionVector->sYSearchRange = 64;
 
     /* Set pIntraPeriod defaults */
     OMX_CONF_INIT_STRUCT(pComponentPrivate->pH264IntraPeriod, OMX_VIDEO_CONFIG_AVCINTRAPERIOD);
