@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) Texas Instruments - http://www.ti.com/
  *
@@ -1573,8 +1572,9 @@ OMX_ERRORTYPE FreeResources (LCML_DSP_INTERFACE *hInterface)
 {
     OMX_ERRORTYPE eError = OMX_ErrorNone;
     LCML_DSP_INTERFACE *codec;
+    struct OMX_TI_Debug dbg = ((LCML_CODEC_INTERFACE*)hInterface->pCodecinterfacehandle)->dbg;
 
-    OMX_PRINT1 ((struct OMX_TI_Debug)(((LCML_CODEC_INTERFACE *)hInterface->pCodecinterfacehandle)->dbg), "%d :: LCML:: FreeResources\n",__LINE__);
+    OMX_PRINT1(dbg, "%d :: LCML:: FreeResources\n",__LINE__);
     if(hInterface->dspCodec != NULL)
     {
         LCML_FREE(hInterface->dspCodec);
@@ -1586,7 +1586,7 @@ OMX_ERRORTYPE FreeResources (LCML_DSP_INTERFACE *hInterface)
         pthread_mutex_destroy(&codec->m_isStopped_mutex);
         pthread_mutex_lock(&codec->mutex);
 
-        OMX_PRINT1 ((struct OMX_TI_Debug)(((LCML_CODEC_INTERFACE *)hInterface->pCodecinterfacehandle)->dbg), "%d :: LCML:: FreeResources\n",__LINE__);
+        OMX_PRINT1(dbg, "%d :: LCML:: FreeResources\n",__LINE__);
         if(codec->g_aNotificationObjects[0]!= NULL)
         {
             LCML_FREE(codec->g_aNotificationObjects[0]);
@@ -1603,8 +1603,7 @@ OMX_ERRORTYPE FreeResources (LCML_DSP_INTERFACE *hInterface)
                 codec->g_aNotificationObjects[2] = NULL;
             }
  #endif
-            OMX_DBG_CLOSE((struct OMX_TI_Debug )(((LCML_CODEC_INTERFACE*)hInterface->pCodecinterfacehandle)->dbg));
-            LCML_FREE(((LCML_CODEC_INTERFACE*)hInterface->pCodecinterfacehandle));
+            OMX_DBG_CLOSE(dbg);
             hInterface->pCodecinterfacehandle = NULL;
         }
         pthread_mutex_unlock(&codec->mutex);
